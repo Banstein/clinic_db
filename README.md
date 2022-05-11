@@ -3,6 +3,9 @@
 > In this project I used a relational database to create the initial data structure for a patient clinic.
 
 
+## Screenshots
+![clinic_diagram](https://user-images.githubusercontent.com/35707975/167818225-905c53d2-2947-4d2a-96b4-85bc5870e330.png)
+
 ## Getting Started
 
 This repository includes files with plain SQL that can be used to recreate a database:
