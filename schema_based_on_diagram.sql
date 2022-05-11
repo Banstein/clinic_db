@@ -26,3 +26,12 @@ CREATE TABLE invoices (
   PRIMARY KEY(id),
   FOREIGN KEY(medical_history_id) REFERENCES medical_histories(id) ON DELETE CASCADE
 );
+
+CREATE TABLE treatments (
+  id INT,
+  type VARCHAR,
+  name VARCHAR,
+  PRIMARY KEY(id),
+  FOREIGN KEY(id) REFERENCES medical_histories(id) ON DELETE CASCADE
+);
+
