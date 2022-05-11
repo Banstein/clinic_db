@@ -11,9 +11,13 @@ CREATE TABLE medical_histories (
   id INT GENERATED ALWAYS AS IDENTITY,
   admitted_at TIMESTAMP,
   status VARCHAR(250),
-  patient_id INT,
-  PRIMARY KEY(id),
-  FOREIGN KEY(patient_id) REFERENCES patient(id) ON DELETE CASCADE
+  patient_id INT REFERENCES patient(id),
+  PRIMARY KEY(id)
+);
+
+CREATE TABLE treatment_of_medical_histories (
+  medical_history_id INT REFERENCES medical_histories(id),
+  treatment_id INT REFERENCES treatments(id) 
 );
 
 CREATE TABLE invoices (
@@ -22,17 +26,15 @@ CREATE TABLE invoices (
   generated_at TIMESTAMP,
   patient_id INT,
   payed_at TIMESTAMP,
-  medical_history_id INT,
-  PRIMARY KEY(id),
-  FOREIGN KEY(medical_history_id) REFERENCES medical_histories(id) ON DELETE CASCADE
+  medical_history_id INT REFERENCES medical_histories(id),
+  PRIMARY KEY(id)
 );
 
 CREATE TABLE treatments (
-  id INT,
+  id INT REFERENCES medical_histories(id),
   type VARCHAR,
   name VARCHAR,
-  PRIMARY KEY(id),
-  FOREIGN KEY(id) REFERENCES medical_histories(id) ON DELETE CASCADE
+  PRIMARY KEY(id)
 );
 
 CREATE TABLE invoices_items (
@@ -40,8 +42,7 @@ CREATE TABLE invoices_items (
   unit_price DECIMAL,
   quantity INT,
   total_price DECIMAL,
-  invoice_id INT,
-  treatment_id INT,
-  PRIMARY KEY(id),
-  FOREIGN KEY(treatment_id) REFERENCES treatments(id) ON DELETE CASCADE
+  invoice_id INT REFERENCES invoices(id),
+  treatment_id INT REFERENCES treatments(id),
+  PRIMARY KEY(id)
 );
